@@ -47,7 +47,7 @@ osga/
 ├── osga-nami/    # Audio engine
 ├── osga-koto/    # Sensor interface
 ├── osga-torii/   # Web interface
-└── osga-kumo/    # Home automation
+└── osga-kumo/    # Home screen 
 ```
 
 ## Module Example
