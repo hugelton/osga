@@ -1,4 +1,4 @@
-# osga : Organic Sound Generative Architecture
+# osga : Organic Sound Generation Architecture
 
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-A modular architecture for creating organic, generative sound ecosystems. Combines physical computing with algorithmic synthesis for emergent audio experiences.
+osga is non-musical sound computer. 
 
 ## Features
 
