@@ -37,9 +37,6 @@ def main():
                         except Exception as e:
                             print(f"Error in update: {e}")
                     last_time = current_time
-                else:
-                    # CPU使用率を下げるための短いスリープ
-                    time.sleep(0.001)
 
         except KeyboardInterrupt:
             print("\nTest terminated by user")
