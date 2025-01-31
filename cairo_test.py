@@ -76,7 +76,7 @@ class CairoTest:
 
         # 右下にテキストを表示
         self.ctx.move_to(self.width - text_width - 10,
-                         self.height - text_height - 10)
+                         self.height - text_height)
         self.ctx.show_text(version_text)
         self.send_to_fb()
 
