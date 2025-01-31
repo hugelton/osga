@@ -43,7 +43,7 @@ def main():
         exception_type, exception_object, exception_traceback = sys.exc_info()
         filename = exception_traceback.tb_frame.f_code.co_filename
         line_no = exception_traceback.tb_lineno
-        print(f"Test error: {filname} : {line_no} :: {e}")
+        print(f"Test error: {filename} : {line_no} :: {e}")
 
 
 if __name__ == "__main__":
