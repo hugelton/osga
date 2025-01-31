@@ -19,7 +19,7 @@ def main():
             engine.lua.globals().init()
 
         # メインループ (30 FPS)
-        frame_time = 1.0 / 30.0
+        frame_time = 1.0 / 15.0
         last_time = time.time()
 
         try:
