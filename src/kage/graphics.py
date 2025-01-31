@@ -7,7 +7,7 @@ class Kage:
     def __init__(self):
         self.width = 320
         self.height = 240
-        self.fb = open('/dev/fb1', 'wb')
+        self.fb = open('/dev/fb0', 'wb')
         self.buffer = Image.new('RGB', (self.width, self.height), 'black')
         self.draw = ImageDraw.Draw(self.buffer)
 
