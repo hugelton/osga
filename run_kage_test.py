@@ -1,5 +1,6 @@
 # run_kage_test.py
 import time
+import sys
 from src.kage import Kage
 from src.kage.lua_binding import KageLuaEngine
 
@@ -39,7 +40,10 @@ def main():
             print("\nTest terminated by user")
 
     except Exception as e:
-        print(f"Test error: {e}")
+        exception_type, exception_object, exception_traceback = sys.exc_info()
+        filename = exception_traceback.tb_frame.f_code.co_filename
+        line_no = exception_traceback.tb_lineno
+        print(f"Test error: {filname} : {line_no} :: {e}")
 
 
 if __name__ == "__main__":

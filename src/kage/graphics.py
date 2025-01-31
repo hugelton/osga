@@ -1,3 +1,4 @@
+# src/kage/graphics.py
 from PIL import Image  # 画像読み込み用
 import cairo
 import time
@@ -152,7 +153,8 @@ class Kage:
     def drawImage(self, image, x, y):
         """画像を描画"""
         if image is None:
-            return
+            print("Error: No image provided to drawImage")
+            return  # 何もしない
 
         # PILイメージからCairoサーフェスに変換
         img_data = bytes(image.tobytes())
@@ -173,7 +175,8 @@ class Kage:
     def drawImageEx(self, image, x, y, scale=1.0, rotation=0.0):
         """拡大縮小と回転付きで画像を描画"""
         if image is None:
-            return
+            print("Error: No image provided to drawImageEx")
+            return  # 何もしない
 
         img_data = bytes(image.tobytes())
         img_surface = cairo.ImageSurface.create_for_data(
