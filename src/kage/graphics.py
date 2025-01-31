@@ -47,30 +47,40 @@ class Kage:
                         self.current_palette[color_name] = (
                             float(r), float(g), float(b))
                         self.color_indices[i] = color_name
+                        print(f"Loaded color {color_name} at index {i}")
         except Exception as e:
             print(f"Failed to load palette {name}: {e}")
-            # デフォルトカラー（黒と白）を設定
+            # デフォルトカラーを設定
             self.current_palette = {
                 "black": (0.0, 0.0, 0.0),
                 "white": (1.0, 1.0, 1.0)
             }
             self.color_indices = {0: "black", 1: "white"}
+            print("Using default palette")
 
     def setPalette(self, name):
         """パレットを切り替える"""
         self.loadPalette(name)
 
     def setColor(self, name_or_index):
-        """色を設定（名前またはインデックスで）"""
         if isinstance(name_or_index, int):
             if name_or_index in self.color_indices:
                 name = self.color_indices[name_or_index]
                 r, g, b = self.current_palette[name]
                 self.ctx.set_source_rgb(r, g, b)
+            else:
+                print(f"Warning: Color index {
+                      name_or_index} not found in palette")
+                # デフォルト色（例えば黒）を設定するか、エラーとして扱う
+                self.ctx.set_source_rgb(0.0, 0.0, 0.0)  # 黒に設定
         else:
             if name_or_index in self.current_palette:
                 r, g, b = self.current_palette[name_or_index]
                 self.ctx.set_source_rgb(r, g, b)
+            else:
+                print(f"Warning: Color name {
+                      name_or_index} not found in palette")
+                self.ctx.set_source_rgb(0.0, 0.0, 0.0)  # 黒に設定
 
     def setRGB(self, r, g, b):
         """RGB値で直接色を設定"""
