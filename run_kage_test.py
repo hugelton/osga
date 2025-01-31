@@ -29,6 +29,7 @@ def main():
 
                 if delta >= frame_time:
                     # updateの実行
+                    print("Globals:", engine.lua.globals())
                     if 'update' in engine.lua.globals():
                         engine.lua.globals().update()
                     last_time = current_time
