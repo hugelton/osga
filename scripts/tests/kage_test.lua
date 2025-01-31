@@ -1,3 +1,4 @@
+-- kage_test.lua
 -- 初期化
 function init()
     -- パレットとカラーの設定

@@ -31,7 +31,11 @@ def main():
                     # updateの実行
                     print("Globals:", engine.lua.globals())
                     if 'update' in engine.lua.globals():
-                        engine.lua.globals().update()
+                        print("Calling update function...")
+                        try:
+                            engine.lua.globals().update()
+                        except Exception as e:
+                            print(f"Error in update: {e}")
                     last_time = current_time
                 else:
                     # CPU使用率を下げるための短いスリープ
