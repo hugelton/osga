@@ -36,11 +36,6 @@ function update()
     kage.fillCircle(250, 50, 30)
     print("Filled circle")
 
-    -- ポリゴン描画
-    kage.setColor("white")
-    print("Set color to white")
-    kage.drawPolygon({ { 50, 200 }, { 100, 150 }, { 150, 200 } })
-    print("Drawn polygon")
 
     kage.sendBuffer()
     print("Sent buffer to display")
