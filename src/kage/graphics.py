@@ -69,8 +69,7 @@ class Kage:
                 r, g, b = self.current_palette[name]
                 self.ctx.set_source_rgb(r, g, b)
             else:
-                print(f"Warning: Color index {
-                      name_or_index} not found in palette")
+                print(f"Warning: Color index {name_or_index} not found in palette")
                 # デフォルト色（例えば黒）を設定するか、エラーとして扱う
                 self.ctx.set_source_rgb(0.0, 0.0, 0.0)  # 黒に設定
         else:
@@ -78,8 +77,7 @@ class Kage:
                 r, g, b = self.current_palette[name_or_index]
                 self.ctx.set_source_rgb(r, g, b)
             else:
-                print(f"Warning: Color name {
-                      name_or_index} not found in palette")
+                print(f"Warning: Color name {name_or_index} not found in palette")
                 self.ctx.set_source_rgb(0.0, 0.0, 0.0)  # 黒に設定
 
     def setRGB(self, r, g, b):
