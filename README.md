@@ -1,37 +1,35 @@
-# osga : Organic Sound Generative Architecture
+# osga : Organic Sound Generation Architecture
 
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-** osga is work in progress. **
+**osga is work in progress.**
 
 ## Overview
 
-A modular architecture for creating organic, generative sound ecosystems. Combines physical computing with algorithmic synthesis for emergent audio experiences.
+osga is non-musical sound device. A computer that allows you to program sound and vision. 
 
 ## Features
 
 - Modular Lua-based scripting system
-- Multi-sensor integration (IMU, touch)
-- Embedded graphics subsystem
-- Web interface for remote control
-- Expandable hardware architecture
+- Audio output via I2S DAC
+- Visual feedback via LCD
+- Motion sensing with IMU
+- Web interface
 
 ## Hardware Architecture
 
 ```mermaid
 graph TD
-    RP[ Raspberry Pi Zero W ] -->|SPI| LCD[ILI9341 320x240 LCD]
-    RP -->|I2S| DAC[MAX98357/PCM5102 Audio DAC]
-    RP -->|I2C| IMU[MPU6050 Gyro+Accel]
-    RP -->|GPIO| UI[Physical Interfaces]
+    RP[ Raspberry Pi Zero W ] -->|SPI| LCD[ILI9341 LCD]
+    RP -->|I2S| DAC[PCM5102 DAC]
+    RP -->|I2C| IMU[MPU6050]
+    RP -->|GPIO| UI[UI Controls]
     DAC -->|Analog| SPK[Speaker]
-    IMU -->|Motion Data| RP
-    LCD -->|Display| VIZ[Visualizations]
+    IMU -->|Motion| RP
+    LCD -->|Display| VIZ[Visual]
 ```
 
 ## Installation
-
-### System Setup
 
 ```bash
 cd ~
@@ -41,44 +39,24 @@ chmod +x install.sh
 sudo reboot
 ```
 
-### Hardware Requirements
-
-| Component           | Interface | Purpose                   |
-| ------------------- | --------- | ------------------------- |
-| ILI9341 LCD         | SPI       | Visual feedback system    |
-| MPU6050             | I2C       | Motion sensing            |
-| MAX98357/PCM5102    | I2S       | High-quality audio output |
-| Raspberry Pi Zero W | -         | Main computing unit       |
-
 ## Project Structure
 
 ```
 osga/
-├── osga-kage/    # Display subsystem (TFT graphics)
-├── osga-nami/    # Audio synthesis engine
-├── osga-koto/    # Sensor interface layer
-├── osga-torii/   # Web server interface
-└── osga-kumo/    # Home automation integration
+├── osga-kage/    # Display subsystem
+├── osga-nami/    # Audio engine
+├── osga-koto/    # Sensor interface
+├── osga-torii/   # Web interface
+└── osga-kumo/    # Home screen 
 ```
 
-## Sublications (Modules)
-
-Create modular components with this structure:
-
-```
-MyModule/
-├── main.lua      # Core logic
-├── icon.png      # 32x32px module icon
-└── info.json     # Metadata descriptor
-```
-
-### Example Module (Block)
+## Module Example
 
 ```lua
 block = {}
 
 function block.init()
-  -- Initialization logic
+  -- Initialization
 end
 
 function block.draw()
@@ -88,11 +66,9 @@ function block.draw()
 end
 
 function block.update()
-  -- Frame-based updates
+  -- Updates
 end
 ```
-
-## Development
 
 ## License
 
@@ -100,6 +76,6 @@ This project is licensed under the **GNU General Public License v3.0**. See [LIC
 
 ## Community
 
-- Report issues: [GitHub Issues](https://github.com/hugelton/osga/issues)
-- Hardware designs: [osga-hardware](https://github.com/hugelton/osga-hardware)
-- Discussion forum: [OSGA Discourse](https://github.com/hugelton/osga/discussions/)
+- Issues: [GitHub Issues](https://github.com/hugelton/osga/issues)
+- Hardware: [osga-hardware](https://github.com/hugelton/osga-hardware)
+- Forum: [OSGA Discourse](https://github.com/hugelton/osga/discussions/)
