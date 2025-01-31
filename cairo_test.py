@@ -64,6 +64,26 @@ class CairoTest:
 
             self.send_to_fb()
 
+        # アニメーション終了後にバージョン情報を表示
+        self.ctx.set_source_rgb(1, 1, 1)  # 白文字
+        self.ctx.select_font_face("Inter Display",
+                                  cairo.FONT_SLANT_NORMAL,
+                                  cairo.FONT_WEIGHT_NORMAL)
+        self.ctx.set_font_size(20)  # 小さなフォントサイズ
+        version_text = "v0.1"
+        text_width = self.ctx.text_extents(version_text).width
+        text_height = self.ctx.text_extents(version_text).height
+
+        # 右下にテキストを表示
+        self.ctx.move_to(self.width - text_width - 10,
+                         self.height - text_height - 10)
+        self.ctx.show_text(version_text)
+        self.send_to_fb()
+
+    def __del__(self):
+        if hasattr(self, 'fb'):
+            self.fb.close()
+
     def __del__(self):
         if hasattr(self, 'fb'):
             self.fb.close()

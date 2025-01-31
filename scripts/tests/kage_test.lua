@@ -1,49 +1,34 @@
--- kage_test.lua
+-- 初期化
 function init()
-    print("Starting OSGA Graphics Test")
-
-    -- サイズ取得
-    width, height = kage.getSize()
-    print("Display size:", width, "x", height)
+    -- パレットとカラーの設定
+    kage.setPalette("base")
+    print("Initial setup complete")
 end
 
+-- 更新とテスト描画
 function update()
-    -- 基本操作テスト
-    kage.clear(1) -- 白で消去
+    -- 画面クリア
+    kage.clear("black")
 
-    -- 図形描画テスト
-    -- 左上: 基本図形
-    kage.setColor(2) -- プライマリカラー
-    kage.drawPixel(10, 10)
-    kage.drawLine(20, 10, 50, 40)
-    kage.drawRect(60, 10, 30, 30)
-    kage.fillRect(100, 10, 30, 30)
+    -- 基本図形のテスト
+    kage.setColor("white")
+    kage.fillRect(10, 10, 50, 50)
 
-    -- 右上: 円と三角形
-    kage.setColor(0) -- 黒
-    kage.fillCircle(200, 40, 20)
-    kage.setColor(2)
-    kage.drawCircle(250, 40, 20)
-    kage.drawTriangle(280, 20, 310, 20, 295, 50)
+    kage.setRGB(1.0, 0.0, 0.0) -- 赤色
+    kage.drawCircle(160, 120, 40)
 
-    -- 中央: テキスト
-    kage.setColor(0)
-    kage.setFontSize(3)
-    kage.drawText(100, 100, "OSGA Test")
-    kage.setFontSize(2)
-    kage.drawText(100, 130, "Graphics API")
-    kage.setFontSize(1)
-    kage.drawText(100, 150, "Version 0.1")
+    -- テキスト描画
+    kage.setColor("white")
+    kage.setFontSize(20)
+    kage.drawText(80, 80, "OSGA Test")
 
-    -- 左下: 多角形
-    pts = { { 20, 180 }, { 50, 180 }, { 60, 200 }, { 40, 220 }, { 10, 210 } }
-    kage.setColor(2)
-    kage.drawPolygon(pts)
+    -- パレットカラーのテスト
+    kage.setColor(2) -- インデックス2のカラー
+    kage.fillCircle(250, 50, 30)
 
-    -- 右下: アークと楕円
-    kage.drawArc(200, 200, 30, 0, math.pi)
-    kage.drawEllipse(280, 200, 30, 20)
+    -- ポリゴン描画
+    kage.setColor("white")
+    kage.drawPolygon({ { 50, 200 }, { 100, 150 }, { 150, 200 } })
 
-    -- バッファを更新
     kage.sendBuffer()
 end
