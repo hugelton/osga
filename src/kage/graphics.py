@@ -1,26 +1,16 @@
 from PIL import Image, ImageDraw, ImageFont
-import numpy as np
 import math
-import mmap
+import colorsys
 
 
 class Kage:
     def __init__(self):
         self.width = 320
         self.height = 240
-
-        # メモリマップトI/Oの設定
-        self.fb = open('/dev/fb0', 'rb+')
-        self.fb_size = self.width * self.height * 2  # 16bit color
-        self.fb_map = mmap.mmap(
-            self.fb.fileno(), self.fb_size, mmap.MAP_SHARED)
-
-        # ダブルバッファリング
+        self.fb = open('/dev/fb1', 'wb')
         self.buffer = Image.new('RGB', (self.width, self.height), 'black')
         self.draw = ImageDraw.Draw(self.buffer)
 
-        # RGB565ルックアップテーブルの作成
-        self._setup_color_lut()
         # 描画属性
         self.current_color = 0
         self.current_rgb = None  # 追加
@@ -48,14 +38,6 @@ class Kage:
         except:
             self.font = ImageFont.load_default()
 
-    def _setup_color_lut(self):
-        self.rgb_lut = np.zeros((256, 256, 256, 2), dtype=np.uint8)
-        for r in range(256):
-            for g in range(256):
-                for b in range(256):
-                    rgb = ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
-                    self.rgb_lut[r, g, b] = [rgb >> 8, rgb & 0xFF]
-
     def get_current_color(self):
         if self.current_rgb:  # 優先度: 直接指定 > パレット
             return self.current_rgb
@@ -69,21 +51,12 @@ class Kage:
         self.buffer.paste(self.colors[color], (0, 0, self.width, self.height))
 
     def send_buffer(self):
-        # PILイメージをnumpy配列に変換
-        rgb_array = np.array(self.buffer)
-
-        # バッファ全体を一度に変換
-        height, width, _ = rgb_array.shape
-        rgb565_data = np.empty((height, width, 2), dtype=np.uint8)
-
-        # LUTを使用して高速変換
-        rgb565_data = self.rgb_lut[rgb_array[:, :, 0],
-                                   rgb_array[:, :, 1],
-                                   rgb_array[:, :, 2]]
-
-        # メモリマップ経由で書き込み
-        self.fb_map.seek(0)
-        self.fb_map.write(rgb565_data.tobytes())
+        if hasattr(self, 'fb'):
+            data = self.buffer.tobytes()
+            rgb565_data = self._convert_rgb888_to_rgb565(data)
+            self.fb.seek(0)
+            self.fb.write(rgb565_data)
+            self.fb.flush()
 
     def get_size(self):
         return self.width, self.height
@@ -203,10 +176,3 @@ class Kage:
             rgb565_data[i//3*2] = rgb >> 8
             rgb565_data[i//3*2+1] = rgb & 0xFF
         return rgb565_data
-
-    def __del__(self):
-        """クリーンアップ"""
-        if hasattr(self, 'fb_map'):
-            self.fb_map.close()
-        if hasattr(self, 'fb'):
-            self.fb.close()
