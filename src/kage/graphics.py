@@ -66,6 +66,46 @@ class Kage:
         self.send_buffer()
 
     @measure_time
+    def set_color(self, c):
+        self.current_color = c if c in self.colors else 0
+        self.current_rgb = None
+
+    @measure_time
+    def set_color_rgb(self, r, g, b):
+        self.current_rgb = (r, g, b)
+
+    @measure_time
+    def set_alpha(self, a):
+        self.alpha = max(0.0, min(1.0, a))
+
+    @measure_time
+    def set_font_size(self, size):
+        if size in self.font_sizes:
+            self.font_size = size
+            try:
+                self.font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                                               self.font_sizes[self.font_size])
+            except:
+                self.font = ImageFont.load_default()
+
+    @measure_time
+    def set_font_style(self, style):
+        self.font_style = style
+
+    @measure_time
+    def draw_pixel(self, x, y):
+        self.draw.point((x, y), fill=self.get_current_color())
+        self.send_buffer()
+
+    @measure_time
+    def draw_line(self, x1, y1, x2, y2, stroke=None):
+        width = stroke if stroke is not None else self.line_width
+        self.draw.line((x1, y1, x2, y2),
+                       fill=self.get_current_color(),
+                       width=width)
+        self.send_buffer()
+
+    @measure_time
     def _convert_rgb888_to_rgb565(self, data):
         rgb565_data = bytearray(len(data) // 3 * 2)
         for i in range(0, len(data), 3):
