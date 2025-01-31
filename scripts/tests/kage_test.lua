@@ -13,7 +13,7 @@ function update()
     print("Cleared screen to black")
 
     -- 基本図形のテスト
-    kage.setColor("white")
+    kage.setRGB(1.0, 1.0, 1.0)
     print("Set color to white")
     kage.fillRect(10, 10, 50, 50)
     print("Filled rectangle")

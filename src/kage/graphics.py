@@ -41,13 +41,15 @@ class Kage:
                 self.current_palette.clear()
                 self.color_indices.clear()
 
-                for i, line in enumerate(lines):
+                i = 1  # Luaのインデックスは1から
+                for line in lines:
                     if line.strip() and not line.startswith('#'):
                         r, g, b, color_name = line.strip().split()
                         self.current_palette[color_name] = (
                             float(r), float(g), float(b))
-                        self.color_indices[i] = color_name
+                        self.color_indices[i] = color_name  # iは1から始まる
                         print(f"Loaded color {color_name} at index {i}")
+                        i += 1
         except Exception as e:
             print(f"Failed to load palette {name}: {e}")
             # デフォルトカラーを設定
@@ -64,20 +66,22 @@ class Kage:
 
     def setColor(self, name_or_index):
         if isinstance(name_or_index, int):
-            if name_or_index in self.color_indices:
-                name = self.color_indices[name_or_index]
+            # LuaインデックスをPythonの0始まりに調整
+            adjusted_index = name_or_index - 1
+            if adjusted_index in self.color_indices:
+                name = self.color_indices[adjusted_index]
                 r, g, b = self.current_palette[name]
                 self.ctx.set_source_rgb(r, g, b)
             else:
-                print(f"Warning: Color index {name_or_index} not found in palette")
-                # デフォルト色（例えば黒）を設定するか、エラーとして扱う
-                self.ctx.set_source_rgb(0.0, 0.0, 0.0)  # 黒に設定
+                print(f"Warning: Color index not found in palette")
+                # デフォルト色設定
+                self.ctx.set_source_rgb(0.0, 0.0, 0.0)
         else:
             if name_or_index in self.current_palette:
                 r, g, b = self.current_palette[name_or_index]
                 self.ctx.set_source_rgb(r, g, b)
             else:
-                print(f"Warning: Color name {name_or_index} not found in palette")
+                print(f"Warning: Color name not found in palette")
                 self.ctx.set_source_rgb(0.0, 0.0, 0.0)  # 黒に設定
 
     def setRGB(self, r, g, b):
