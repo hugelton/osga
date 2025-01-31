@@ -26,6 +26,12 @@ class CairoTest:
 
     def splash_animation(self):
         """円とスクロールするテキスト"""
+        # フォント設定を変更
+        self.ctx.select_font_face("Inter Display",
+                                  cairo.FONT_SLANT_NORMAL,
+                                  cairo.FONT_WEIGHT_NORMAL)
+        self.ctx.set_font_size(40)
+
         # 黒背景
         self.ctx.set_source_rgb(0, 0, 0)
         self.ctx.paint()
@@ -43,10 +49,8 @@ class CairoTest:
             self.send_to_fb()
 
         # テキストを左からスクロール
-        self.ctx.select_font_face("DejaVu Sans")
-        self.ctx.set_font_size(40)
-
-        for x in range(-160, 1, 5):  # -160 から 0 へ移動
+        # -160から-20へ移動（中央で停止）
+        for x in range(-160, -19, 5):  # -20で停止するように調整
             self.ctx.set_source_rgb(0, 0, 0)
             self.ctx.paint()
 
@@ -55,7 +59,7 @@ class CairoTest:
             self.ctx.fill()
 
             self.ctx.set_source_rgb(0, 0, 0)
-            self.ctx.move_to(160 + x, 130)  # テキストの位置調整
+            self.ctx.move_to(160 + x, 130)
             self.ctx.show_text("osga")
 
             self.send_to_fb()
