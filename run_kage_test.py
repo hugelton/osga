@@ -1,3 +1,4 @@
+# run_kage_test.py
 import time
 from src.kage import Kage
 from src.kage.lua_binding import KageLuaEngine
@@ -10,7 +11,7 @@ def main():
         engine = KageLuaEngine(kage)
 
         # Luaスクリプトのロード
-        engine.load_script('scripts/tests/kage_test.lua')
+        engine.loadScript('scripts/tests/kage_test.lua')
 
         # initがあれば実行
         if 'init' in engine.lua.globals():
