@@ -15,3 +15,6 @@ sublications/uploaded/*
 # OS
 .DS_Store
 *.log
+
+# vscode
+.vscode
