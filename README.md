@@ -3,6 +3,7 @@
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 **osga is work in progress.**
+<img width="1238" alt="osga_device_mock" src="https://github.com/user-attachments/assets/20c96b6a-c83a-40ca-aaec-3064d1db479b" />
 
 ## Overview
 
