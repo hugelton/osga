@@ -1,9 +1,0 @@
-RPi.GPIO
-RPi-GPIO-Rotary
-miniaudio
-fastapi
-uvicorn
-python-multipart
-lupa  
-pycairo 
-numpy 
