@@ -4,7 +4,9 @@ OSGA is a specialized sound computer designed for creating ambient soundscapes, 
 
 ## Overview
 
-OSGA is a dedicated hardware/software platform for ambient sound generation. It features a collection of sound apps that create different ambient environments - from rain sounds to train journeys, from acid sequences to meditative buddha machines.
+OSGA is a dedicated hardware/software platform for ambient sound generation. It features a collection of sound apps.
+Like: P.O.S.G. for Playdate that my product. https://hugelton.itch.io/posg
+
 
 ## Features
 
@@ -93,5 +95,5 @@ This project is available under the LGPL v3 license. See the LICENSE file for de
 
 - OSGA by Leo Kuroshita from Hugelton Instruments (2025)
 - NADA font by Leo Kuroshita
-- Sound generation based on denver.lua by SuperZazu with extensions
+- Sound generation based on denver.lua by SuperZazu with extensions https://github.com/superzazu/denver.lua
 - Additional libraries: sone.lua by camchenry
